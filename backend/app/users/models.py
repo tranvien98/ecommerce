@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Literal
 
+from app.users.constants import UsersStatus
 from beanie import Document, Indexed
 from pydantic import Field
 
@@ -12,7 +13,7 @@ class Users(Document):
     user_name:str = Indexed(unique=True)
     user_email:str = Indexed(unique=True)
     full_name:str
-    user_password:str
+    user_password:str = Field(hidden=True)
     user_status: Literal["active", "inactive"] = "active"
     is_verified: bool = False
     user_roles: list[str] = []

@@ -26,7 +26,9 @@ class Settings(BaseSettings):
     These parameters can be configured
     with environment variables.
     """
-
+    version: str = "5.6.2024.1"
+    secret_key: str = "ecommerce_backend"
+    algorithm: str = "HS256"
     host: str = "0.0.0.0"
     port: int = 5055
     # quantity of workers for uvicorn

@@ -1,7 +1,8 @@
 from pathlib import Path
 
 from app.core.lifetime import lifespan
-from app.core.router import router
+from app.core.middleware import AuthMiddleware
+from app.core.routers import router
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import UJSONResponse
@@ -35,7 +36,7 @@ def get_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"]
     )
-
+    app.add_middleware(AuthMiddleware)
     app.include_router(router, prefix="/api")
 
 
