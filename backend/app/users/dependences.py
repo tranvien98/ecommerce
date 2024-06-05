@@ -1,7 +1,7 @@
 
-from app.users.users_exceptions import EmailAlreadyExists, UsernameAlreadyExists
-from app.users.users_model import Users
-from app.users.users_schemas import UserInCreate
+from app.users.exceptions import EmailAlreadyExists, UsernameAlreadyExists
+from app.users.models import Users
+from app.users.schemas import UserInCreate
 
 
 async def valid_create_user(user: UserInCreate):

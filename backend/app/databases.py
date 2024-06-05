@@ -4,7 +4,7 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from app.core.config import settings
-from app.users.users_model import Users
+from app.users.models import Users
 from beanie import init_beanie
 from fastapi.encoders import jsonable_encoder
 from motor.motor_asyncio import AsyncIOMotorClient

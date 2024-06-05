@@ -1,5 +1,5 @@
 from app.exceptions import BadRequest
-from app.users.users_constants import ErrorCode
+from app.users.constants import ErrorCode
 
 
 class EmailAlreadyExists(BadRequest):
@@ -7,3 +7,6 @@ class EmailAlreadyExists(BadRequest):
 
 class UsernameAlreadyExists(BadRequest):
     DETAIL = ErrorCode.USERNAME_ALREADY_EXISTS
+
+class UserNotFound(BadRequest):
+    DETAIL = ErrorCode.USER_NOT_FOUND
