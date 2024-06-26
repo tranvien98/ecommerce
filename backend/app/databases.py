@@ -5,12 +5,14 @@ from zoneinfo import ZoneInfo
 
 from app.core.config import settings
 from app.users.models import Users
+from app.modules.skus.models import SkuSchema
+from app.modules.spus.models import ProductSchema
 from beanie import init_beanie
 from fastapi.encoders import jsonable_encoder
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, ConfigDict, model_validator
 
-ALL = [Users]
+ALL = [Users, ProductSchema, SkuSchema]
 
 async def init_mongo_db() -> None:
     """

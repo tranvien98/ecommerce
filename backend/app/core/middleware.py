@@ -5,7 +5,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 
 class AuthMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
-        not_auth_routes = ["/api/sign-in", "/api/users/sign-up"]
+        not_auth_routes = ["/api/sign-in", "/api/users/sign-up", "/api/refresh-token"]
         if request.url.path in not_auth_routes:
             response = await call_next(request)
             return response
