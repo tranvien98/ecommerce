@@ -1,4 +1,6 @@
+from jose import jwt
 from datetime import datetime, timedelta
+from beanie import PydanticObjectId
 
 from app.auth.constants import ExpireTimes
 from app.auth.exceptions import AuthError, InvalidPassword, UserNotActive
@@ -6,9 +8,6 @@ from app.auth.helpers import check_password
 from app.auth.schemas import UserInSignIn
 from app.core.config import settings
 from app.users.models import Users
-from fastapi import Depends
-from fastapi.security import OAuth2PasswordBearer
-from jose import jwt
 
 # oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/sign-in", auto_error=False)
 
@@ -62,7 +61,18 @@ async def get_current_user(token: str):
         return AuthError
     try:
         payload = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
-        user = await Users.find_one(Users.id == payload.get("user_id"))
+        user = await Users.find_one(Users.id == PydanticObjectId(payload.get("user_id")))
         return user
+    except:
+        return None
+
+
+async def verify_refresh_token(refresh_token: str):
+    """
+    Verify refresh token
+    """
+    try:
+        payload = jwt.decode(refresh_token, settings.secret_key, algorithms=[settings.algorithm])
+        return payload
     except:
         return None

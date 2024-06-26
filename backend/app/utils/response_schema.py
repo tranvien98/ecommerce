@@ -32,3 +32,4 @@
 #                     if isinstance(obj, UUID):
 #                         return str(obj)
 #                 return orjson.dumps([item.dict() for item in content], default=uuid_decoder)
+
